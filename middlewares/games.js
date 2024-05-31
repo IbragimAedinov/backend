@@ -1,10 +1,10 @@
 const gameModel = require("../models/game");
 
 const checkEmptyFields = async (req, res, next) => {
-  if(req.isVoteRequest) {
+  if (req.isVoteRequest) {
     next();
     return;
-  } 
+  }
   if (
     !req.body.title ||
     !req.body.description ||
@@ -36,10 +36,10 @@ const checkIsGameExists = async (req, res, next) => {
 };
 
 const checkIsCategoriesAvaliable = async (req, res, next) => {
-  if(req.isVoteRequest) {
+  if (req.isVoteRequest) {
     next();
     return;
-  } 
+  }
   if (!req.body.categories || req.body.categories.lenght === 0) {
     res.headers = { "Content-Type": "application/json" };
     res.status(400).send({ message: "Выберите хотя бы одну категорию" });
@@ -68,11 +68,11 @@ const checkIsUsersAreSafe = async (req, res, next) => {
 };
 
 const checkIsVoteRequest = async (req, res, next) => {
-if (Object.keys(req.body).length === 1 && req.body.users) {
-  req.isVoteRequest = true;
-}
-next();
-}; 
+  if (Object.keys(req.body).length === 1 && req.body.users) {
+    req.isVoteRequest = true;
+  }
+  next();
+};
 
 const findAllGames = async (req, res, next) => {
   if (req.query["categories.name"]) {
@@ -141,5 +141,5 @@ module.exports = {
   checkIsGameExists,
   checkIsCategoriesAvaliable,
   checkIsUsersAreSafe,
-  checkIsVoteRequest
+  checkIsVoteRequest,
 };
